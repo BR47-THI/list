@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="module" src="./javascript/app.js" defer></script>
+  </head>
+  <body>
+    <div id="to-do-list">
+      <section class="container">
+        <div class="header">
+          <h1>To-Do-List</h1>
+        </div>
+        <div class="input-field">
+          <form>
+            <input class="input-area" type="text" v-model="newTask" />
+
+            <button class="add-btn" v-on:click.prevent="addTask">Add</button>
+          </form>
+        </div>
+        <div class="value-container">
+          <div class="main-task">
+            <div class="tasks">
+              <h2>Tasks</h2>
+              <div class="remaining">
+                <img src="./assects/tasks logo.png" alt="" />
+                <span>{{tasks.length}}</span>
+              </div>
+            </div>
+            <div class="avi-container">
+              <div
+                v-if="tasks.length>0"
+                v-for="(task,index) in tasks"
+                :key="task"
+                class="avi-tasks"
+              >
+                <ol>
+                  <li>{{task}}</li>
+                </ol>
+                <div class="edit-optn">
+                  <img
+                    v-on:click="deleteTask(index)"
+                    src="./assects/delete-logo.png"
+                    alt=""
+                  />
+                  <img
+                    v-on:click="addCompTask(index)"
+                    src="./assects/done-logo.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="total-comp">
+            <div class="comp-task">
+              <h2>Completed</h2>
+              <div class="comp-value">
+                <img src="./assects/completed-task-logo.svg" alt="" />
+                <span>{{compTasks.length}}</span>
+              </div>
+            </div>
+
+            <div class="completed-container">
+              <div
+                v-for="completed in compTasks"
+                :key="completed"
+                class="completed-text"
+              >
+                <span>{{completed}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
